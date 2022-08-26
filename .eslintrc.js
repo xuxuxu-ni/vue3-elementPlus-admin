@@ -106,6 +106,7 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 'warn',
     // 要求操作符周围有空格
     'space-infix-ops': 'warn',
+    'vue/multi-word-component-names': 0,
   },
   globals: {
     defineProps: 'readonly',

@@ -11,12 +11,15 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.9",
     "axios": "^0.26.1",
-    "element-plus": "^2.1.4",
+    "element-plus": "^2.2.15",
+    "font-awesome": "^4.7.0",
     "js-cookie": "^3.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.12",
     "vue": "^3.2.25",
+    "vue-i18n": "^9.1.9",
     "vue-router": "4"
   },
   "devDependencies": {
