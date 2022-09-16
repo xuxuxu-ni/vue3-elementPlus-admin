@@ -31,9 +31,6 @@ export const roleStore = defineStore('roleStore', () => {
     Object.assign(info,info)
     localStorage.setItem('info', JSON.stringify(info))
     routerDataState.newRoutes(info.role)
-
-    // @ts-ignore
-    router.addRoute( '', routerDataState.addRouters)
   }
 
   return { info, getInfo, setRole }

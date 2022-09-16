@@ -5,9 +5,11 @@
 </template>
 
 <script>
-export default {
-  name: 'CommerViews'
-}
+import {defineComponent} from 'vue'
+
+export default defineComponent({
+  name: 'CommonViews',
+})
 </script>
 
 <style scoped>

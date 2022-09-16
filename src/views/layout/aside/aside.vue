@@ -17,8 +17,8 @@
           @select="selectMenu"
       >
         <template v-for="(item,index) in routerDataState.routers">
-          <template v-if="!item.meta?.hidden">
-            <el-sub-menu v-if="!item.meta?.alone && item.children.length>0" :key="index" :index="index+''">
+          <template v-if="!item.hidden">
+            <el-sub-menu v-if="!item.alone && item.children.length>0" :key="index" :index="index+''">
               <template #title>
                 <i :class="item.iconCls?item.iconCls:['fa', 'fa-server']"></i>
                 <span>{{ $t(`routeName.${item.name}`) }}</span>

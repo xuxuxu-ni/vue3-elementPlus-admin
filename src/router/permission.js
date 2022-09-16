@@ -30,9 +30,9 @@ router.beforeEach((to, from, next) => {
           // })
           await routerDataState.newRoutes(roleState.info.role)
           // await store.dispatch("newRoutes", roleState.info.role)
-          let newAddRouters = routerDataState.addRouters
+          // let newAddRouters = routerDataState.addRouters
 
-          await router.addRoute(newAddRouters)
+          // await router.addRoute(newAddRouters)
           next({path: to.path})
         }())
       } else {

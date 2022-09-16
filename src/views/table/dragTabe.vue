@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Sortable from 'sortablejs'
+// import Sortable from 'sortablejs'
 import {defineComponent, onMounted, reactive} from 'vue'
 export default defineComponent({
   name: 'DragTabe',
@@ -115,7 +115,7 @@ export default defineComponent({
     onMounted(() => {
       let el = document.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
 
-      Sortable.create(el)
+      // Sortable.create(el)
     })
 
     return {

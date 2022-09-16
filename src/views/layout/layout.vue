@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script>
+<script >
 import layoutAside from './aside/aside'
 import layoutHeader from './header/header'
 import Bottom from './Footer/bottom'

@@ -4,11 +4,11 @@
  * Date: 2022/3/19
  * Description: 文件描述
  */
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 // @ts-ignore
 import en from '../i18n/lang/en'
 
-import CommerViews from '@/views/commerViews.vue'
+import CommonViews from '@/views/CommonViews.vue'
 import Login from '@/views/login/index.vue'
 import Layout from '@/views/layout/layout.vue'
 import HomeMain from '@/views/index/mainIndex.vue'
@@ -38,27 +38,29 @@ const btnPermissions = () => import('@/views/permissions/btnPermissions.vue')
 
 const routeName = en.routeName
 
-const defaultRouter: Array<RouteRecordRaw> = [
+const defaultRouter = [
   { path: '/',
     redirect: '/index',
-    meta: {hidden: true},
+    hidden: true,
     children: []
   },
   {
     path: '/login',
     component: Login,
     name: '',
-    meta: {hidden: true},
+    hidden: true,
     children: []
   },
   {
     path: '/index',
+    iconCls: 'fa fa-dashboard', // 图标样式class
     name: routeName.home,
     component: Layout,
+    alone: true,
     children: [
       {
         path: '/index',
-        meta: {iconCls: 'fa fa-dashboard', alone: true,role: ['superAdmin']},
+        iconCls: 'fa fa-dashboard', // 图标样式class
         name: routeName.home,
         component: HomeMain,
         children: []
@@ -69,11 +71,10 @@ const defaultRouter: Array<RouteRecordRaw> = [
     path: '/404',
     component: NotFound,
     name: '404',
-    meta: {hidden: true},
+    hidden: true,
     children: []
   }
 ]
-
 
 const addRouter = [
   {
@@ -205,7 +206,7 @@ const addRouter = [
         path: '/erji3',
         iconCls: 'fa fa-server',
         name: routeName['menu2-3'],
-        component: CommerViews, // 无限极菜单的容器
+        component: CommonViews, // 无限极菜单的容器
         children: [
           {
             path: '/sanji1',
@@ -225,7 +226,7 @@ const addRouter = [
             path: '/sanji3',
             iconCls: 'fa fa-server',
             name: routeName['menu3-3'],
-            component: CommerViews,
+            component: CommonViews,
             children: [
               {
                 path: '/siji',
@@ -238,7 +239,7 @@ const addRouter = [
                 path: '/siji1',
                 iconCls: 'fa fa-server',
                 name: routeName['menu4-2'],
-                component: CommerViews,
+                component: CommonViews,
                 children: [
                   {
                     path: '/wuji',
@@ -264,7 +265,7 @@ const addRouter = [
     children: [
       {
         path: '/upload',
-        iconCls: 'el-icon-upload2', // 图标样式class
+        iconCls: 'fa fa-upload', // 图标样式class
         name: routeName.fileUpload,
         component: Upload,
         children: []
@@ -273,7 +274,7 @@ const addRouter = [
   },
   {
     path: '/',
-    iconCls: 'el-icon-edit', // 图标样式class
+    iconCls: 'fa fa-pencil-square-o', // 图标样式class
     name: routeName.editor,
     component: Layout,
     meta: {role: ['superAdmin', 'admin']},
@@ -296,25 +297,23 @@ const addRouter = [
   },
   {
     path: '/',
-    iconCls: 'el-icon-setting', // 图标样式class
+    iconCls: 'fa fa-cog', // 图标样式class
     name: routeName.systemSettings,
     component: Layout,
     meta: {role: ['superAdmin']},
     children: [
       {
         path: '/navClassifies',
-        iconCls: 'el-icon-menu', // 图标样式class
+        iconCls: 'fa fa-th-list', // 图标样式class
         name: routeName.navMenu,
         component: NavClassify,
         children: []
       }
     ]
   },
-  { path: '*',
+  { path: '/:catchAll(.*)',
     redirect: '/404',
-    meta: {
-      hidden: true,
-    },
+    hidden: true,
     children: []
   }
 

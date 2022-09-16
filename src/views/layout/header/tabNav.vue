@@ -6,7 +6,7 @@
 v-for="(item, index) in layoutState.layoutData.tabnavBox" :key="item.title"
             class="tabnav" :class="{ active: $route.path === item.path }" @contextmenu.prevent="openMenu(item,$event,index)">
           <router-link :to="item.path">{{ $t(`routeName.${item.title}`) }}</router-link>
-          <i v-if="index !== 0" class="el-icon-error" @click="removeTab(item)"></i>
+          <el-icon v-if="index !== 0" @click="removeTab(item)"><CircleCloseFilled /></el-icon>
         </li>
       </transition-group>
     </div>
@@ -18,65 +18,52 @@ v-for="(item, index) in layoutState.layoutData.tabnavBox" :key="item.title"
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // import appStore from '@/store'
-import { defineComponent, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import {tab, layoutStore} from '@/store/modules/layoutStore'
 import {useRouter } from 'vue-router'
-export default defineComponent( {
-  name: 'TabNav',
-  setup() {
-    const layoutState = layoutStore()
-    let rightMenuShow = ref(false)
-    let left = ref(0)
-    let top = ref(0)
-    const router = useRouter()
 
-    const openMenu = (item: tab, e: any, index: number) => {
-      if (index === 0) {
-        return false
-      }
-      rightMenuShow.value = true
-      left = e.clientX + 10
-      top = e.clientY
-      layoutState.openMenu(item)
-    }
-    const removeTab = (tabItem: tab) => {
-      layoutState.removeTab({tabItem, router})
-    }
-    const removeOtherTab = (tabItem: tab) => {
-      layoutState.removeOtherTab({tabItem, router})
-    }
-    const removeAllTab = (tabItem: tab) => {
-      layoutState.removeOtherTab({tabItem, all: true, router})
-    }
+const layoutState = layoutStore()
+let rightMenuShow = ref(false)
+let left = ref(0)
+let top = ref(0)
+const router = useRouter()
+
+const openMenu = (item: tab, e: any, index: number) => {
+  if (index === 0) {
+    return false
+  }
+  rightMenuShow.value = true
+  left.value = e.clientX + 10
+  top.value = e.clientY
+  layoutState.openMenu(item)
+}
+const removeTab = (tabItem: tab) => {
+  layoutState.removeTab({tabItem, router})
+}
+const removeOtherTab = (tabItem: tab) => {
+  layoutState.removeOtherTab({tabItem, router})
+}
+const removeAllTab = (tabItem: tab) => {
+  layoutState.removeOtherTab({tabItem, all: true, router})
+}
 
 
-    watch(rightMenuShow, function (value){
+watch(rightMenuShow, function (value){
 
-      if (value) {
-        document.body.addEventListener('click', () => {
-          rightMenuShow.value = false
-        })
-      } else {
-        document.body.removeEventListener('click', () => {
-          rightMenuShow.value = false
-        })
-      }
-
+  if (value) {
+    document.body.addEventListener('click', () => {
+      rightMenuShow.value = false
     })
+  } else {
+    document.body.removeEventListener('click', () => {
+      rightMenuShow.value = false
+    })
+  }
 
-    return {
-      rightMenuShow,
-      left,
-      top,
-      openMenu,
-      removeTab,
-      removeOtherTab,
-      removeAllTab,
-      layoutState
-    }
-  }})
+})
+
 </script>
 <style>
   .tabnav {

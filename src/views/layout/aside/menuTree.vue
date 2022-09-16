@@ -9,7 +9,7 @@
           <menu-tree :menu-data="child.children"/>
         </el-sub-menu>
 
-        <el-menu-item v-else-if="!child.meta?.hidden" :key="child.path" :index="child.path">
+        <el-menu-item v-else-if="!child.hidden" :key="child.path" :index="child.path">
           <i :class="child.iconCls?child.iconCls:['fa', 'fa-file']"/>
           <span>{{ $t(`routeName.${child.name}`) }}</span>
         </el-menu-item>

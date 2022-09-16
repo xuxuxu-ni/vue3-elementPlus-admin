@@ -6,11 +6,11 @@
  */
 import {reactive, toRefs} from 'vue'
 import { defineStore } from 'pinia'
-import {defaultRouter, addRouter} from '@/router'
+import router, {defaultRouter, addRouter} from '@/router'
 import {RouteRecordRaw} from 'vue-router'
 interface IrouterDataList {
   routers: RouteRecordRaw[]
-  addRouters: RouteRecordRaw[]
+  // addRouters: RouteRecordRaw[]
 }
 
 export const routerDataStore = defineStore('routerDataStore', () => {
@@ -19,13 +19,17 @@ export const routerDataStore = defineStore('routerDataStore', () => {
 
   const routerDataList = reactive<IrouterDataList>({
     routers: [],
-    addRouters: []
+    // addRouters: []
   })
 
   function setRouters(routerArr: Array<RouteRecordRaw>) {
 
     routerDataList.routers = defaultRouter.concat(routerArr) // 所有有权限的路由表，用来生成菜单列表
-    routerDataList.addRouters = routerArr // 保存动态路由用来addRouter
+    // routerDataList.addRouters = routerArr // 保存动态路由用来addRouter
+    routerArr.forEach((item) => {
+      router.addRoute(item)
+    })
+
   }
 
 
@@ -51,7 +55,7 @@ export const routerDataStore = defineStore('routerDataStore', () => {
     setRouters(newArr)
     // 正式开发
     // eachSelect(addRouter, role)
-    // commit('setRouters', addRouter)
+    // setRouters(addRouter)
   }
 
   return { ...toRefs(routerDataList), newRoutes }
