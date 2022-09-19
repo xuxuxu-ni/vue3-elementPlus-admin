@@ -159,20 +159,6 @@ const addRouter = [
     component: Layout,
     children: [
       {
-        path: '/dataTable',
-        iconCls: 'fa fa-sliders', // 图标样式class
-        name: routeName.multiDataTable,
-        component: DataTable,
-        children: []
-      },
-      {
-        path: '/filterTable',
-        iconCls: 'fa fa-sort-amount-asc', // 图标样式class
-        name: routeName.filterTable,
-        component: FilterTable,
-        children: []
-      },
-      {
         path: '/dragTabe',
         iconCls: 'fa fa-hand-stop-o', // 图标样式class
         name: routeName.dragSort,

@@ -6,11 +6,11 @@
  */
 import { reactive } from 'vue'
 import { defineStore } from 'pinia'
-import router from '@/router'
+
 import {routerDataStore} from '@/store/modules/routerDataStore'
 
 
-interface info {
+export interface info {
   permissions: string
   role: string
 }

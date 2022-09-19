@@ -9,6 +9,8 @@ import 'font-awesome/css/font-awesome.css'
 import i18n from './i18n/i18n'
 import { createPinia } from 'pinia'
 import '@/router/permission'
+import permission from '@/directive/permission/button.js'
+
 // import NProgress from 'nprogress'
 // import 'nprogress/nprogress.css'
 
@@ -26,6 +28,7 @@ app.use(createPinia())
 app.use(router)
 app.use(i18n)
 app.use(ElementPlus)
+app.directive('roleBtn', permission)
 
 
 app.mount('#app')

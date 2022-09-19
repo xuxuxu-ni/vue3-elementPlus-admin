@@ -1,8 +1,11 @@
 <template>
   <div>
-    <el-radio v-model="permissions" label="superAdmin" border>超级管理员</el-radio>
-    <el-radio v-model="permissions" label="admin" border>管理员</el-radio>
-    <el-radio v-model="permissions" label="ordinary" border>普通用户</el-radio>
+    <h3 style="margin: 0 0 20px;">切换角色时,查看左侧菜单的变化</h3>
+    <el-radio-group v-model="permissions">
+      <el-radio label="superAdmin" border>超级管理员</el-radio>
+      <el-radio label="admin" border>管理员</el-radio>
+      <el-radio label="ordinary" border>普通用户</el-radio>
+    </el-radio-group>
     <div style="margin: 50px 0px;">
       [权限:  "{{options.permissions}}",    角色:   "{{options.role}}"]
     </div>
@@ -13,53 +16,57 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "pagePermissions",
-  data () {
-    return {
-      permissions: this.$store.getters.info.role,
-      options: {
-        role: this.$store.getters.info.role,
-        permissions: this.$store.getters.info.permissions
-      }
-    }
-  },
-  mounted () {
-    this.$store.dispatch("setRole", this.options)
-  },
-  watch: {
-    permissions (newQuestion, oldQuestion) {
-      switch (newQuestion) {
-      case "superAdmin":
-        this.options = {
-          role: "superAdmin",
-          permissions: "超级管理员"
-        }
-        break
-      case "admin":
-        this.options = {
-          role: "admin",
-          permissions: "管理员"
-        }
-        break
-      case "ordinary":
-        this.options = {
-          role: "ordinary",
-          permissions: "普通用户"
-        }
-      }
-      this.$store.dispatch("setRole", this.options)
 
-      //  刷新 tabnav 权限管理测试需要
-      this.$store.dispatch("removeOtherTab", {tabItem: {
-        title: "pageControl",
-        path: "/pagePermissions"
-      },
-      router: this.$router})
-    }
+<script setup lang="ts">
+import {info, roleStore} from '@/store/modules/roleStore'
+import {layoutStore} from '@/store/modules/layoutStore'
+import {onMounted, reactive, ref, watch} from 'vue'
+import router from '@/router'
+
+const roleState = roleStore()
+const layoutState = layoutStore()
+const permissions = ref(roleState.info.role)
+let options = reactive<info>({
+  role: roleState.info.role,
+  permissions: permissions.value
+})
+
+
+onMounted(() => {
+  roleState.setRole(options)
+})
+
+watch(permissions,(newQuestion) => {
+  switch (newQuestion) {
+  case 'superAdmin':
+    options = Object.assign(options,{
+      role: 'superAdmin',
+      permissions: '超级管理员'
+    })
+    break
+  case 'admin':
+    options = Object.assign(options,{
+      role: 'admin',
+      permissions: '管理员'
+    })
+    break
+  case 'ordinary':
+    options = Object.assign(options,{
+      role: 'ordinary',
+      permissions: '普通用户'
+    })
   }
-}
+
+  roleState.setRole(options)
+  //  刷新 tabnav 权限管理测试需要
+  layoutState.removeOtherTab({
+    tabItem: {
+      title: 'pageControl',
+      path: '/pagePermissions'
+    },
+    router: router
+  })
+})
 </script>
 
 <style scoped>

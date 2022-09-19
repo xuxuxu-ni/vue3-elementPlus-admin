@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
+    <el-form :model="dynamicValidateForm" ref="formRef" label-width="100px" class="demo-dynamic">
       <el-form-item
         prop="indexName"
         label="首页"
@@ -22,32 +22,39 @@
         <el-button @click.prevent="removeDomain(domain)">删除</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交</el-button>
+        <el-button type="primary" @click="submitForm('formRef')">提交</el-button>
         <el-button @click="addDomain">新增分类</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
-<script>
-export default {
-  name: "navClassify",
-  data () {
-    return {
-      dynamicValidateForm: {
-        domains: [],
-        indexName: "首页",
-        indexHref: "/index"
-      }
-    }
-  },
-  methods: {
-    submitForm (formName) {
-      let oneData = {
-        name: this.dynamicValidateForm.indexName,
-        href: this.dynamicValidateForm.indexHref
-      }
-      function coppyArray (arr) {
+<script setup lang="ts">
+
+import {onMounted, reactive, ref} from 'vue'
+import {FormInstance} from 'element-plus'
+  const formRef = ref<FormInstance>()
+
+interface DomainItem {
+  name: string
+  href: string
+}
+
+  const dynamicValidateForm = reactive<{
+    domains: DomainItem[]
+    indexName: string
+    indexHref: string
+  }>({
+    domains: [],
+    indexName: "首页",
+    indexHref: "/index"
+  })
+
+  let oneData = {
+    name: dynamicValidateForm.indexName,
+    href: dynamicValidateForm.indexHref
+  }
+      function coppyArray (arr: DomainItem[]) {
         return arr.map((e) => {
           if (typeof e === "object") {
             return Object.assign({}, e)
@@ -56,74 +63,30 @@ export default {
           }
         })
       }
-      let arrdata = coppyArray(this.dynamicValidateForm.domains)
+      let arrdata = coppyArray(dynamicValidateForm.domains)
       arrdata.unshift(oneData)
       let formData = arrdata
-      let that = this
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.$axios.post("/api/setting/setNavClassify", {
-            navClassifyData: formData
-          })
-            .then(response => {
-              console.log(response)
-              that.$message({
-                showClose: true,
-                message: response.data.msg,
-                type: "success"
-              })
-            })
-            .catch(err => {
-              console.log(err)
-              that.$message({
-                showClose: true,
-                message: err,
-                type: "error"
-              })
-            })
-        } else {
-          console.log("error submit!!")
-          return false
-        }
-      })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
-    },
-    removeDomain (item) {
-      var index = this.dynamicValidateForm.domains.indexOf(item)
+
+
+    const resetForm = (formName: FormInstance | undefined) =>{
+      if (!formName) return
+      formName.resetFields()
+    }
+    const removeDomain = (item: DomainItem) => {
+      var index = dynamicValidateForm.domains.indexOf(item)
       if (index !== -1) {
-        this.dynamicValidateForm.domains.splice(index, 1)
+        dynamicValidateForm.domains.splice(index, 1)
       }
-    },
-    addDomain () {
-      this.dynamicValidateForm.domains.push({
-        indexName: "",
-        indexHref: "",
-        key: Date.now()
+    }
+    const addDomain = () => {
+      dynamicValidateForm.domains.push({
+        name: "",
+        href: ""
       })
     }
-  },
-  mounted () {
-    //  页面加载完之后从后台获取导航列表
-    let that = this
-    // this.$axios.get('/api/setting/getNavClassify')
-    //   .then(function (response) {
-    //     if (response.status === 200) {
-    //       console.log(response)
-    //       that.dynamicValidateForm.indexName = response.data.navList[0].name
-    //       that.dynamicValidateForm.indexHref = response.data.navList[0].href
-    //       response.data.navList.splice(0, 1)
-    //       that.dynamicValidateForm.domains = that.dynamicValidateForm.domains.concat(response.data.navList)
-    //       console.log(that.dynamicValidateForm)
-    //       return false
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error)
-    //   })
-  }
-}
+    const submitForm = () => {
+      console.log('提交')
+    }
 </script>
 
 <style scoped>

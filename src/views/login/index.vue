@@ -2,13 +2,12 @@
 import {reactive, ref, defineComponent, h} from 'vue'
 import {ElMessage, ElNotification} from 'element-plus/es'
 import {store} from '@/store'
-import {useRouter} from 'vue-router'
+import router from '@/router'
 
 export default defineComponent({
   name: 'LOGIN',
   setup() {
     let storeData = store()
-    const router = useRouter()
     let smdl = ref(true)
     let loginForm = reactive({
       username: 'vue-xuadmin',
@@ -23,7 +22,7 @@ export default defineComponent({
           type: 'error'
         })
         return false
-      } 
+      }
       // 真实请求参考
       // this.$request.fetchLogin({
       //   username: that.loginForm.username,
@@ -57,7 +56,7 @@ export default defineComponent({
       //     type: "error"
       //   })
       // })
-      
+
     }
     let message = () => {
       ElNotification({

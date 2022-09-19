@@ -1,99 +1,109 @@
 <template>
   <div>
-    <h3>点击上传</h3>
-    <el-upload
-      class="upload-demo"
-      action="https://jsonplaceholder.typicode.com/posts/"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-remove="beforeRemove"
-      multiple
-      :limit="3"
-      :on-exceed="handleExceed"
-      :file-list="fileList">
-      <el-button size="small" type="primary">点击上传</el-button>
-      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-    </el-upload>
     <h3>用户头像上传</h3>
     <p>使用 before-upload 限制用户上传的图片格式和大小。</p>
     <el-upload
-      class="avatar-uploader"
-      action="https://jsonplaceholder.typicode.com/posts/"
-      :show-file-list="false"
-      :on-success="handleAvatarSuccess"
-      :before-upload="beforeAvatarUpload">
-      <img v-if="imageUrl" :src="imageUrl" class="avatar">
-      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        class="avatar-uploader"
+        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload"
+    >
+      <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+      <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
     </el-upload>
     <h3>照片墙</h3>
     <p>使用 list-type 属性来设置文件列表的样式。</p>
     <el-upload
-      action="https://jsonplaceholder.typicode.com/posts/"
-      list-type="picture-card"
-      :on-preview="handlePictureCardPreview"
-      :on-remove="handleRemove">
-      <i class="el-icon-plus"></i>
+        v-model:file-list="fileList"
+        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+        list-type="picture-card"
+        :on-preview="handlePictureCardPreview"
+        :on-remove="handleRemove"
+    >
+      <el-icon><Plus /></el-icon>
     </el-upload>
-    <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="dialogImageUrl" alt="">
+
+    <el-dialog v-model="dialogVisible">
+      <img w-full :src="dialogImageUrl" alt="Preview Image" />
     </el-dialog>
+
     <h3>拖拽上传</h3>
     <el-upload
-      class="upload-demo"
-      drag
-      action="https://jsonplaceholder.typicode.com/posts/"
-      multiple>
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+        class="upload-demo"
+        drag
+        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+        multiple
+    >
+      <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+      <div class="el-upload__text">
+        Drop file here or <em>click to upload</em>
+      </div>
+      <template #tip>
+        <div class="el-upload__tip">
+          jpg/png files with a size less than 500kb
+        </div>
+      </template>
     </el-upload>
   </div>
 </template>
 
-<script>
-export default {
-  name: "upload",
-  data () {
-    return {
-      fileList: [{name: "food.jpeg", url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"}, {name: "food2.jpeg", url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100"}],
-      imageUrl: "",
-      dialogImageUrl: "",
-      dialogVisible: false
-    }
-  },
-  methods: {
-    handleRemove (file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview (file) {
-      console.log(file)
-    },
-    handleExceed (files, fileList) {
-      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
-    },
-    beforeRemove (file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`)
-    },
-    handleAvatarSuccess (res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
-    },
-    beforeAvatarUpload (file) {
-      const isJPG = file.type === "image/jpeg"
-      const isLt2M = file.size / 1024 / 1024 < 2
+<script setup lang="ts">
+import { ref } from 'vue'
+import { ElMessage } from 'element-plus'
+import { Plus, UploadFilled  } from '@element-plus/icons-vue'
 
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!")
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!")
-      }
-      return isJPG && isLt2M
-    },
-    handlePictureCardPreview (file) {
-      this.dialogImageUrl = file.url
-      this.dialogVisible = true
-    }
+import type { UploadProps, UploadUserFile } from 'element-plus'
+
+
+const imageUrl = ref('')
+
+const handleAvatarSuccess: UploadProps['onSuccess'] = (
+    response,
+    uploadFile
+) => {
+  imageUrl.value = URL.createObjectURL(uploadFile.raw!)
+}
+
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  if (rawFile.type !== 'image/jpeg') {
+    ElMessage.error('Avatar picture must be JPG format!')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    ElMessage.error('Avatar picture size can not exceed 2MB!')
+    return false
   }
+  return true
+}
+const fileList = ref<UploadUserFile[]>([
+  {
+    name: 'food.jpeg',
+    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+  },
+  {
+    name: 'plant-1.png',
+    url: 'https://element-plus.org/images/plant-1.png',
+  },
+  {
+    name: 'food.jpeg',
+    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+  },
+  {
+    name: 'plant-2.png',
+    url: 'https://element-plus.org/images/plant-1.png',
+  }
+])
+
+const dialogImageUrl = ref('')
+const dialogVisible = ref(false)
+
+const handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
+  console.log(uploadFile, uploadFiles)
+}
+
+const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
+  dialogImageUrl.value = uploadFile.url!
+  dialogVisible.value = true
 }
 </script>
 
