@@ -11,11 +11,11 @@ import { createPinia } from 'pinia'
 import '@/router/permission'
 import permission from '@/directive/permission/button.js'
 
-// import NProgress from 'nprogress'
-// import 'nprogress/nprogress.css'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
-// NProgress.inc(0.2)
-// NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
+NProgress.inc(0.2)
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 const app = createApp(App)

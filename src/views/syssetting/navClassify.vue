@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <el-form :model="dynamicValidateForm" ref="formRef" label-width="100px" class="demo-dynamic">
+    <el-form ref="formRef" :model="dynamicValidateForm" label-width="100px" class="demo-dynamic">
       <el-form-item
         prop="indexName"
         label="首页"
@@ -8,17 +8,17 @@
       required: true, message: '分类不能为空', trigger: 'blur'
     }"
       >
-        <el-input placeholder="导航名称" v-model="dynamicValidateForm.indexName"></el-input>
-        <el-input placeholder="path路径" disabled v-model="dynamicValidateForm.indexHref"></el-input>
+        <el-input v-model="dynamicValidateForm.indexName" placeholder="导航名称"></el-input>
+        <el-input v-model="dynamicValidateForm.indexHref" placeholder="path路径" disabled></el-input>
       </el-form-item>
       <el-form-item
         v-for="(domain, index) in dynamicValidateForm.domains"
-        :label="'导航' + (index+1)"
         :key="domain.key"
+        :label="'导航' + (index+1)"
         :prop="'domains.' + index + '.value'"
       >
-        <el-input placeholder="导航名称" v-model="domain.name"></el-input>
-        <el-input placeholder="path路径" v-model="domain.href"></el-input>
+        <el-input v-model="domain.name" placeholder="导航名称"></el-input>
+        <el-input v-model="domain.href" placeholder="path路径"></el-input>
         <el-button @click.prevent="removeDomain(domain)">删除</el-button>
       </el-form-item>
       <el-form-item>
@@ -31,62 +31,61 @@
 
 <script setup lang="ts">
 
-import {onMounted, reactive, ref} from 'vue'
+import {reactive, ref} from 'vue'
 import {FormInstance} from 'element-plus'
-  const formRef = ref<FormInstance>()
+const formRef = ref<FormInstance>()
 
-interface DomainItem {
-  name: string
-  href: string
-}
+  interface DomainItem {
+    name: string
+    href: string
+  }
 
-  const dynamicValidateForm = reactive<{
+const dynamicValidateForm = reactive<{
     domains: DomainItem[]
     indexName: string
     indexHref: string
   }>({
     domains: [],
-    indexName: "首页",
-    indexHref: "/index"
+    indexName: '首页',
+    indexHref: '/index'
   })
 
-  let oneData = {
-    name: dynamicValidateForm.indexName,
-    href: dynamicValidateForm.indexHref
+let oneData = {
+  name: dynamicValidateForm.indexName,
+  href: dynamicValidateForm.indexHref
+}
+
+const coppyArray = (arr: DomainItem[]) => {
+  return arr.map((e) => {
+    if (typeof e === 'object') {
+      return Object.assign({}, e)
+    }
+    return e
+
+  })
+}
+
+let arrdata = coppyArray(dynamicValidateForm.domains)
+
+arrdata.unshift(oneData)
+
+const removeDomain = (item: DomainItem) => {
+  let index = dynamicValidateForm.domains.indexOf(item)
+
+  if (index !== -1) {
+    dynamicValidateForm.domains.splice(index, 1)
   }
-      function coppyArray (arr: DomainItem[]) {
-        return arr.map((e) => {
-          if (typeof e === "object") {
-            return Object.assign({}, e)
-          } else {
-            return e
-          }
-        })
-      }
-      let arrdata = coppyArray(dynamicValidateForm.domains)
-      arrdata.unshift(oneData)
-      let formData = arrdata
+}
+const addDomain = () => {
+  dynamicValidateForm.domains.push({
+    name: '',
+    href: ''
+  })
+}
+const submitForm = () => {
+  console.log('提交')
+}
 
-
-    const resetForm = (formName: FormInstance | undefined) =>{
-      if (!formName) return
-      formName.resetFields()
-    }
-    const removeDomain = (item: DomainItem) => {
-      var index = dynamicValidateForm.domains.indexOf(item)
-      if (index !== -1) {
-        dynamicValidateForm.domains.splice(index, 1)
-      }
-    }
-    const addDomain = () => {
-      dynamicValidateForm.domains.push({
-        name: "",
-        href: ""
-      })
-    }
-    const submitForm = () => {
-      console.log('提交')
-    }
 </script>
 
 <style scoped>

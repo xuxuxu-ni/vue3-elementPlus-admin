@@ -48,7 +48,7 @@
     </el-row>
     <el-row>
       <el-col :span="24">
-<!--        <line-echarts id="lineEcharts" height="300px" ref="echarts"></line-echarts>-->
+        <line-echarts id="lineEcharts" ref="myEcharts" height="300px"></line-echarts>
       </el-col>
     </el-row>
     <el-row>
@@ -59,30 +59,29 @@
   </div>
 </template>
 
-<script>
-// import LineEcharts from "../../components/ECharts/lineEcharts"
-import Maintable from '../table/maintable'
-export default {
-  name: 'MainIndex',
-  components: {Maintable},
-  mounted () {
-    this.selfAdaption()
-  },
-  methods: {
-    // echart自适应
-    selfAdaption () {
-      let that = this
+<script setup lang="ts">
+import LineEcharts from '@/components/ECharts/lineEcharts'
+import Maintable from '@/views/table/maintable'
+import {onMounted, ref} from 'vue'
+const myEcharts = ref<null | HTMLElement>(null)
 
-      setTimeout(() => {
-        window.onresize = function () {
-          if (that.$refs.echarts) {
-            that.$refs.echarts.chart.resize()
-          }
-        }
-      }, 10)
+onMounted(() => {
+  // selfAdaption()
+  setTimeout(() => {
+    window.onresize = function () {
+
+      if (myEcharts.value.chartResize) {
+        myEcharts.value.chartResize()
+      }
     }
-  }
+  }, 10)
+})
+
+// echart自适应
+const selfAdaption = () => {
+
 }
+
 </script>
 
 <style lang="scss">

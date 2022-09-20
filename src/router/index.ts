@@ -22,15 +22,10 @@ const Sanji2 = () => import('@/views/duoji/sanji2.vue')
 const Siji = () => import('@/views/duoji/siji.vue')
 const Wuji = () => import('@/views/duoji/wuji.vue')
 const Transfer = () => import('@/views/transfer/transfer.vue')
-const DataTable = () => import('@/views/table/dataTables.vue')
-const FilterTable = () => import('@/views/table/filterTable.vue')
 const DragTable = () => import('@/views/table/dragTabe.vue')
 const Upload = () => import('@/views/upload/upload.vue')
-const Markdown = () => import('@/views/editor/markdownView.vue')
-const WangeditorView = () => import('@/views/editor/wangeditorView.vue')
+const editorView = () => import('@/views/editor/editorView.vue')
 const NotFound = () => import('@/views/page404.vue')
-const AddArticle = () => import('@/views/article/addArticle.vue')
-const AddArticleEditor = () => import('@/views/article/addArticleEditor.vue')
 const NavClassify = () => import('@/views/syssetting/navClassify.vue')
 const pagePermissions = () => import('@/views/permissions/pagePermissions.vue')
 const btnPermissions = () => import('@/views/permissions/btnPermissions.vue')
@@ -77,29 +72,6 @@ const defaultRouter = [
 ]
 
 const addRouter = [
-  {
-    path: '/',
-    iconCls: 'el-icon-tickets', // 图标样式class
-    name: routeName.article,
-    component: Layout,
-    children: [
-      {
-        path: '/addArticle',
-        iconCls: 'el-icon-edit-outline', // 图标样式class
-        name: routeName.publishArticle,
-        component: AddArticle,
-        children: []
-      },
-      {
-        path: '/addArticleEditor',
-        iconCls: 'el-icon-edit-outline', // 图标样式class
-        name: routeName.publishArticleEditor,
-        meta: {hidden: true},
-        component: AddArticleEditor,
-        children: []
-      }
-    ]
-  },
   {
     path: '/',
     iconCls: 'fa fa-paw', // 图标样式class
@@ -157,6 +129,7 @@ const addRouter = [
     iconCls: 'fa fa-newspaper-o', // 图标样式class
     name: routeName.table,
     component: Layout,
+    meta: {role: ['superAdmin']},
     children: [
       {
         path: '/dragTabe',
@@ -266,17 +239,10 @@ const addRouter = [
     meta: {role: ['superAdmin', 'admin']},
     children: [
       {
-        path: '/markdown',
+        path: '/editor',
         iconCls: 'fa fa-file-code-o', // 图标样式class
-        name: routeName.markdown,
-        component: Markdown,
-        children: []
-      },
-      {
-        path: '/wangeditor',
-        iconCls: 'fa fa-file-code-o', // 图标样式class
-        name: routeName.wangeditor,
-        component: WangeditorView,
+        name: routeName.editor,
+        component: editorView,
         children: []
       }
     ]

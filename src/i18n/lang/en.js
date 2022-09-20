@@ -28,7 +28,6 @@ const en = {
     fileUpload: 'fileUpload',
     editor: 'editor',
     markdown: 'markdown',
-    wangeditor: 'wangeditor',
     multiDirectory: 'multiDirectory',
     'menu2-1': 'menu2-1',
     'menu2-2': 'menu2-2',
