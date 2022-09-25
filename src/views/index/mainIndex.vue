@@ -5,14 +5,14 @@
         <div class="card kjfs">
           <p class="title"><i class="fa fa-th-large fa-lg"></i>快捷方式</p>
           <ul>
-            <li><router-link to="/addArticle" class="kjfs kjfs-bluee"><span><i class="el-icon-tickets fa-2x"></i></span><span>发表文章</span></router-link></li>
+            <li><router-link to="/addArticle" class="kjfs kjfs-bluee"><span><i class="fa fa-edit fa-2x"></i></span><span>发表文章</span></router-link></li>
             <li><router-link to="/dragTabe" class="kjfs kjfs-pinkk"><span><i class="fa fa-hand-stop-o fa-2x"></i></span><span>拖拽排序</span></router-link></li>
             <li><router-link to="/pagePermissions" class="kjfs kjfs-yelloww"><span><i class="fa fa-universal-access fa-2x"></i></span><span>权限测试</span></router-link></li>
           </ul>
           <ul>
             <li><router-link to="/upload" class="kjfs kjfs-grennn"><span><i class="fa fa-cloud-upload fa-2x"></i></span><span>文件上传</span></router-link></li>
-            <li><router-link to="/navClassifies" class="kjfs kjfs-purplee"><span><i class="fa el-icon-menu fa-2x"></i></span><span>前台菜单</span></router-link></li>
-            <li><router-link to="/markdown" class="kjfs kjfs-lightBluee"><span><i class="fa fa-file-code-o fa-2x"></i></span><span>编辑器</span></router-link></li>
+            <li><router-link to="/navClassifies" class="kjfs kjfs-purplee"><span><i class="fa fa-navicon fa-2x"></i></span><span>前台菜单</span></router-link></li>
+            <li><router-link to="/editor" class="kjfs kjfs-lightBluee"><span><i class="fa fa-file-code-o fa-2x"></i></span><span>编辑器</span></router-link></li>
           </ul>
         </div>
       </el-col>
@@ -36,10 +36,10 @@
             <p><span class="tit">当前版本</span>v1.0.0</p>
             <p><span class="tit">基于框架</span>vue2.0全家桶 + element-ui</p>
             <p><span class="tit">主要特色</span>单页面 / 响应式 / 无限级菜单 / 权限管理 / 极简</p>
-            <p><span class="tit">获取渠道</span>
+            <p><span class="tit">下载地址</span>
                 <span class="gitbox">
-                  <a target="_blank" href="https://github.com/Nirongxu/vue-xuAdmin.git"><el-button type="primary" icon="el-icon-download" size="small">github</el-button></a>
-                  <a target="_blank" href="https://gitee.com/nirongxu/vue-xuAdmin.git"><el-button type="primary" icon="el-icon-download" size="small">码云</el-button></a>
+                  <a target="_blank" href="https://github.com/xuxuxu-ni/vue3-elementPlus-admin"><el-button type="primary" icon="el-icon-download" size="small">github</el-button></a>
+                  <a target="_blank" href="https://gitee.com/nirongxu/vue3-elementPlus-admin"><el-button type="primary" icon="el-icon-download" size="small">码云</el-button></a>
                 </span>
             </p>
           </div>

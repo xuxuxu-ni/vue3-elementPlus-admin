@@ -10,7 +10,7 @@ export default defineComponent({
     let storeData = store()
     let smdl = ref(true)
     let loginForm = reactive({
-      username: 'vue-xuadmin',
+      username: 'admin',
       password: '123456'
     })
 
@@ -265,8 +265,6 @@ v-model="loginForm.password" type="password" size="large" auto-complete="off"
     .ewmbox {
       width: 100%;
       height: 240px;
-      margin-top: -25px;
-
       .ewm {
         width: 140px;
         height: 140px;
@@ -281,7 +279,7 @@ v-model="loginForm.password" type="password" size="large" auto-complete="off"
 
       .ewmicon {
         width: 140px;
-        margin: 20px auto 0;
+        margin: 29px auto 0;
 
         .iconfont {
           float: left;

@@ -1,7 +1,9 @@
 <template>
-  <div id="toolbar-container"></div>
-  <div id="container">
-    <div id="editor">
+  <div class="editor-wrap">
+    <div id="toolbar-container"></div>
+    <div id="container">
+      <div id="editor">
+      </div>
     </div>
   </div>
 </template>
@@ -78,6 +80,11 @@ onMounted(() => {
 }
 </style>
 <style scoped>
+.editor-wrap {
+  background: #ffffff;
+  padding: 30px;
+  box-shadow: 0px 0px 12px rgb(0 0 0 / 12%);
+}
 #container {
   max-height: 600px;
   overflow: auto;
