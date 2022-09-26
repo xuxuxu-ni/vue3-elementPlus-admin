@@ -38,8 +38,8 @@
             <p><span class="tit">主要特色</span>单页面 / 响应式 / 无限级菜单 / 权限管理 / 极简</p>
             <p><span class="tit">下载地址</span>
                 <span class="gitbox">
-                  <a target="_blank" href="https://github.com/xuxuxu-ni/vue3-elementPlus-admin"><el-button type="primary" icon="el-icon-download" size="small">github</el-button></a>
-                  <a target="_blank" href="https://gitee.com/nirongxu/vue3-elementPlus-admin"><el-button type="primary" icon="el-icon-download" size="small">码云</el-button></a>
+                  <a target="_blank" href="https://github.com/xuxuxu-ni/vue3-elementPlus-admin"><el-button type="primary" :icon="Download" size="small">github</el-button></a>
+                  <a target="_blank" href="https://gitee.com/nirongxu/vue3-elementPlus-admin"><el-button type="primary" :icon="Download" size="small">码云</el-button></a>
                 </span>
             </p>
           </div>
@@ -48,7 +48,7 @@
     </el-row>
     <el-row>
       <el-col :span="24">
-        <line-echarts id="lineEcharts" ref="myEcharts" height="300px"></line-echarts>
+        <line-echarts id="lineEcharts" height="300px"></line-echarts>
       </el-col>
     </el-row>
     <el-row>
@@ -60,27 +60,9 @@
 </template>
 
 <script setup lang="ts">
-import LineEcharts from '@/components/ECharts/lineEcharts'
-import Maintable from '@/views/table/maintable'
-import {onMounted, ref} from 'vue'
-const myEcharts = ref<null | HTMLElement>(null)
-
-onMounted(() => {
-  // selfAdaption()
-  setTimeout(() => {
-    window.onresize = function () {
-
-      if (myEcharts.value.chartResize) {
-        myEcharts.value.chartResize()
-      }
-    }
-  }, 10)
-})
-
-// echart自适应
-const selfAdaption = () => {
-
-}
+import LineEcharts from '@/components/ECharts/lineEcharts.vue'
+import Maintable from '@/views/table/maintable.vue'
+import {Download} from '@element-plus/icons-vue'
 
 </script>
 

@@ -6,7 +6,7 @@
  */
 import {reactive, toRefs} from 'vue'
 import { defineStore } from 'pinia'
-import router, {defaultRouter, addRouter} from '@/router'
+import router, {defaultRouter, addRouter, IRouter} from '@/router'
 import {RouteRecordRaw} from 'vue-router'
 interface IrouterDataList {
   routers: RouteRecordRaw[]
@@ -22,7 +22,7 @@ export const routerDataStore = defineStore('routerDataStore', () => {
     // addRouters: []
   })
 
-  function setRouters(routerArr: Array<RouteRecordRaw>) {
+  function setRouters(routerArr: Array<IRouter>) {
 
     routerDataList.routers = defaultRouter.concat(routerArr) // 所有有权限的路由表，用来生成菜单列表
     // routerDataList.addRouters = routerArr // 保存动态路由用来addRouter
@@ -49,7 +49,7 @@ export const routerDataStore = defineStore('routerDataStore', () => {
       }
     }
     // 仅限演示
-    const newArr: Array<RouteRecordRaw> = [...addRouter] // 拷贝这个数组是因为做权限测试的时候可以从低级切回到高级角色，仅限演示，正式开发时省略这步直接使用 addRouter
+    const newArr: Array<IRouter> = [...addRouter] // 拷贝这个数组是因为做权限测试的时候可以从低级切回到高级角色，仅限演示，正式开发时省略这步直接使用 addRouter
 
     eachSelect(newArr, role)
     setRouters(newArr)

@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
 import './theme/westeros.js'
-import {onMounted, ref, defineProps, defineExpose} from 'vue'
+import {onMounted, defineProps, defineExpose} from 'vue'
 
 let chart: echarts.ECharts | null = null
 
@@ -92,15 +92,15 @@ const initChart = () => {
   })
 
 }
-const chartResize = () => {
-  chart?.resize()
-}
-defineExpose({
-  chartResize
-})
+
 
 onMounted(() => {
   initChart()
+  setTimeout(() => {
+    window.onresize = function () {
+      chart?.resize()
+    }
+  }, 10)
 })
 
 

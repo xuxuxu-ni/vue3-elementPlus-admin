@@ -27,8 +27,8 @@ export const roleStore = defineStore('roleStore', () => {
     localStorage.setItem('info', JSON.stringify(info))
   }
 
-  function setRole(info: info) { // 切换角色，测试权限管理
-    Object.assign(info,info)
+  function setRole(infoData: info) { // 切换角色，测试权限管理
+    Object.assign(info,infoData)
     localStorage.setItem('info', JSON.stringify(info))
     routerDataState.newRoutes(info.role)
   }

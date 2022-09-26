@@ -59,7 +59,7 @@ watch(permissions,(newQuestion) => {
   }
 
   roleState.setRole(options)
-  //  刷新 tabnav 权限管理测试需要
+  //  刷新tabnav   权限管理测试需要
   layoutState.removeOtherTab({
     tabItem: {
       title: 'pageControl',

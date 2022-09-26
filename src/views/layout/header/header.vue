@@ -36,10 +36,10 @@
 
 <script lang="ts">
 import Cookies from 'js-cookie'
-import langSelect from '../../../components/lang/langSelect.vue'
+import langSelect from '@/components/lang/langSelect.vue'
 import tabNav from './tabNav.vue'
-import UserInfo from '../../../components/userForm/userInfo.vue'
-import EditPassword from '../../../components/userForm/editPassword.vue'
+import UserInfo from '@/components/userForm/userInfo.vue'
+import EditPassword from '@/components/userForm/editPassword.vue'
 import {defineComponent, ref} from 'vue'
 import {layoutStore} from '@/store/modules/layoutStore'
 import {roleStore} from '@/store/modules/roleStore'

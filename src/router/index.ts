@@ -4,9 +4,9 @@
  * Date: 2022/3/19
  * Description: 文件描述
  */
-import { createRouter, createWebHashHistory } from 'vue-router'
-// @ts-ignore
-import en from '../i18n/lang/en'
+import {RouteRecordRaw, createRouter, createWebHashHistory} from 'vue-router'
+
+import en from '../i18n/lang/en.js'
 
 import CommonViews from '@/views/CommonViews.vue'
 import Login from '@/views/login/index.vue'
@@ -30,10 +30,16 @@ const NavClassify = () => import('@/views/syssetting/navClassify.vue')
 const pagePermissions = () => import('@/views/permissions/pagePermissions.vue')
 const btnPermissions = () => import('@/views/permissions/btnPermissions.vue')
 
-
 const routeName = en.routeName
 
-const defaultRouter = [
+export type IRouter = {
+  hidden?: boolean
+  iconCls?: string
+  alone?: boolean
+  children: Array<IRouter>
+} & RouteRecordRaw
+
+const defaultRouter: Array<IRouter> = [
   { path: '/',
     redirect: '/index',
     hidden: true,
