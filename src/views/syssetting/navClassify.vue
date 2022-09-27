@@ -38,12 +38,14 @@ const formRef = ref<FormInstance>()
   interface DomainItem {
     name: string
     href: string
+    key: number
   }
 
 const dynamicValidateForm = reactive<{
     domains: DomainItem[]
     indexName: string
     indexHref: string
+    key?: number
   }>({
     domains: [],
     indexName: '首页',
@@ -52,7 +54,8 @@ const dynamicValidateForm = reactive<{
 
 let oneData = {
   name: dynamicValidateForm.indexName,
-  href: dynamicValidateForm.indexHref
+  href: dynamicValidateForm.indexHref,
+  key: Date.now()
 }
 
 const coppyArray = (arr: DomainItem[]) => {
@@ -79,7 +82,8 @@ const removeDomain = (item: DomainItem) => {
 const addDomain = () => {
   dynamicValidateForm.domains.push({
     name: '',
-    href: ''
+    href: '',
+    key: Date.now()
   })
 }
 const submitForm = () => {

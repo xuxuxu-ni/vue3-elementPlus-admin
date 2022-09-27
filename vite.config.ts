@@ -4,6 +4,9 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    'process.env': {}
+  },
   plugins: [vue()],
   resolve: {
     alias: {
@@ -25,11 +28,6 @@ export default defineConfig({
     // }
   },
   build: {
-    terserOptions: {
-      compress: {
-        // drop_console: true,
-        // drop_debugger: true
-      },
-    },
+
   },
 })

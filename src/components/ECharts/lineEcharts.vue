@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
 import './theme/westeros.js'
-import {onMounted, defineProps, defineExpose} from 'vue'
+import {onMounted} from 'vue'
 
 let chart: echarts.ECharts | null = null
 

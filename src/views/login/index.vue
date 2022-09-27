@@ -1,8 +1,9 @@
 <script lang="ts">
-import {reactive, ref, defineComponent, h} from 'vue'
+import {reactive, ref, defineComponent, h, onMounted} from 'vue'
 import {ElMessage, ElNotification} from 'element-plus/es'
 import {store} from '@/store'
 import router from '@/router'
+// import api from '@/api'
 
 export default defineComponent({
   name: 'LOGIN',
@@ -23,17 +24,20 @@ export default defineComponent({
         })
         return false
       }
-      // 真实请求参考
-      // this.$request.fetchLogin({
-      //   username: that.loginForm.username,
-      //   password: that.loginForm.password
-      // }).then(res => {
-      //   that.$restBack(res.data, () => {
-      //     that.$store.dispatch("setToken", res.data.data.access_token).then(res => {
-      //       that.$router.push({path: "/"})
+      // 真实请求参考案例
+      // api.login.fetchLogin({
+      //   username: loginForm.username,
+      //   password: loginForm.password
+      // }).then((res: { data: { access_token: any } }) => {
+      //   storeData.setToken(res.data.access_token).then(() => {
+      //     router.push({path: '/'})
+      //   }).catch(res => {
+      //     ElMessage({
+      //       showClose: true,
+      //       message: res,
+      //       type: 'error'
       //     })
-      //   }, "登录成功")
-      // }).catch((err) => {
+      // }).catch((err: any) => {
       //   console.log(err)
       // })
 
@@ -47,15 +51,6 @@ export default defineComponent({
           type: 'error'
         })
       })
-      // that.$store.dispatch("setToken", that.loginForm.username).then(() => {
-      //   that.$router.push({path: "/"})
-      // }).catch(res => {
-      //   that.$message({
-      //     showClose: true,
-      //     message: res,
-      //     type: "error"
-      //   })
-      // })
 
     }
     let message = () => {
@@ -66,11 +61,14 @@ export default defineComponent({
       })
     }
 
+    onMounted(() => {
+      message()
+    })
+
     return {
       smdl,
       loginForm,
-      submitForm,
-      message
+      submitForm
     }
   }
 })

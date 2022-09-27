@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import { Plus, UploadFilled  } from '@element-plus/icons-vue'
+import { Plus, UploadFilled } from '@element-plus/icons-vue'
 
 import type { UploadProps, UploadUserFile } from 'element-plus'
 
@@ -59,8 +59,8 @@ import type { UploadProps, UploadUserFile } from 'element-plus'
 const imageUrl = ref('')
 
 const handleAvatarSuccess: UploadProps['onSuccess'] = (
-    response,
-    uploadFile
+  response,
+  uploadFile
 ) => {
   imageUrl.value = URL.createObjectURL(uploadFile.raw!)
 }
@@ -105,6 +105,7 @@ const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
   dialogImageUrl.value = uploadFile.url!
   dialogVisible.value = true
 }
+
 </script>
 
 <style lang="scss">

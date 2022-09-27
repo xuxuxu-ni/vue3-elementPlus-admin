@@ -35,7 +35,7 @@ export const routerDataStore = defineStore('routerDataStore', () => {
 
   function newRoutes(role: string) { // 切换角色，测试权限管理
     //  通过递归路由表，删除掉没有权限的路由
-    function eachSelect(routers: Array<RouteRecordRaw>, userRole: string) {
+    function eachSelect(routers: Array<IRouter>, userRole: string) {
       for (let j = 0; j < routers.length; j++) {
         const role: any = routers[j].meta?.role
 

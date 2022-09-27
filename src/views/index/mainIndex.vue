@@ -34,7 +34,7 @@
           <p class="title"><i class="fa fa-server"></i>版本信息</p>
           <div class="table">
             <p><span class="tit">当前版本</span>v1.0.0</p>
-            <p><span class="tit">基于框架</span>vue2.0全家桶 + element-ui</p>
+            <p><span class="tit">基于框架</span>vue3 + Pinia + ts + element-ui plus</p>
             <p><span class="tit">主要特色</span>单页面 / 响应式 / 无限级菜单 / 权限管理 / 极简</p>
             <p><span class="tit">下载地址</span>
                 <span class="gitbox">
