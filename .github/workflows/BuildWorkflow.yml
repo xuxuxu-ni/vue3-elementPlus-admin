@@ -4,10 +4,10 @@ name: vue3-elementPlus-admin BuildWorkflow
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
-on: 
+on:
   push:
     branches:
-      - main
+      - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
