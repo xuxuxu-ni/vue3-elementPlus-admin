@@ -13,7 +13,7 @@
 
 > vite + vue3 + Pinia + elementUi-plus 无限级菜单 权限管理 后台模板
 
-### 🏠 [Homepage](https://xuxuxu-ni.github.io/vue3-elementplus-admin/dist/)
+### 🏠 [Homepage](https://xuxuxu-ni.github.io/vue3-elementPlus-admin/#/index)
 ## Author
 
 👤 **xuxuxu-ni**
@@ -41,8 +41,8 @@
 **就算通过查看代码或者其他方法获取全部路由，并且绕过404，花了这么大精力，，那你也看不到新世界的大门，因为所有数据都是通过后台请求返回来的，你没权限后台不会给你数据的，也不会让你去操作，，除非后台不验证权限，只要有人请求我就给你所有数据，，，，**
 
 项目预览地址：
-- github: https://xuxuxu-ni.github.io/vue3-elementplus-admin/dist/
-- 国内gitee: http://nirongxu.gitee.io/vue3-elementplus-admin/#/login
+- github: https://xuxuxu-ni.github.io/vue3-elementPlus-admin/#/
+- 国内gitee: http://nirongxu.gitee.io/vue3-elementplus-admin/#/
 
 vue3-elementplus-admin是基于vite + vue3 + Pinia + elementUi-plus 开发的一个后台模板，实现了无限级菜单，页面、按钮级别的权限管理，为了减少前后端的沟通成本，页面、按钮级别的权限验证和动态路由表的存储校验，也都由前端完成，这样前端新建页面或者删除页面都不需要告诉后台去增加删除路由表
 
@@ -99,8 +99,7 @@ git clone https://github.com/xuxuxu-ni/vue3-elementplus-admin.git
 yarn config set registry https://registry.npm.taobao.org/
 or
 npm config set registry https://registry.npm.taobao.org
-
-# 安装依赖 (如果安装失败就多安装几次，实在不行就换淘宝镜像)
+# 安装依赖
 yarn  or  yarn install
 or
 npm install

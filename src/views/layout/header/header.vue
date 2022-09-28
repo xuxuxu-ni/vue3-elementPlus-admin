@@ -34,95 +34,74 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Cookies from 'js-cookie'
 import langSelect from '@/components/lang/langSelect.vue'
 import tabNav from './tabNav.vue'
 import UserInfo from '@/components/userForm/userInfo.vue'
 import EditPassword from '@/components/userForm/editPassword.vue'
-import {defineComponent, ref} from 'vue'
+import {ref} from 'vue'
 import {layoutStore} from '@/store/modules/layoutStore'
 import {roleStore} from '@/store/modules/roleStore'
 
-export default defineComponent({
-  name: 'Header',
-  components: {EditPassword, tabNav, langSelect, UserInfo},
-  setup() {
-    const layoutState = layoutStore()
-    const roleState = roleStore()
-    let isfullScreen = ref(true)
-    let avatar = ref('/images/icon.jpg')
-    let dialogInfoVisible = ref(false)
-    let dialogPassVisible = ref(false)
-    let title = ref('')
-    let userId = ref('')
+const layoutState = layoutStore()
+const roleState = roleStore()
+let isfullScreen = ref(true)
+let avatar = ref('./images/icon.jpg')
+let dialogInfoVisible = ref(false)
+let dialogPassVisible = ref(false)
+let title = ref('')
+let userId = ref('')
 
-    const collapse = () => {
-      layoutState.collapse()
-    }
-    const successCallback = () => {
-      dialogInfoVisible.value = false
-    }
-    const editPwdCallback = () => {
-      dialogPassVisible.value = false
-    }
-    const fullScreen = () => {
-      if (isfullScreen.value) {
-        let docElm = document.documentElement
+const collapse = () => {
+  layoutState.collapse()
+}
+const successCallback = () => {
+  dialogInfoVisible.value = false
+}
+const editPwdCallback = () => {
+  dialogPassVisible.value = false
+}
+const fullScreen = () => {
+  if (isfullScreen.value) {
+    let docElm = document.documentElement
 
-        if (docElm.requestFullscreen) {
-          docElm.requestFullscreen()
-        } else if (docElm.mozRequestFullScreen) {
-          docElm.mozRequestFullScreen()
-        } else if (docElm.webkitRequestFullScreen) {
-          docElm.webkitRequestFullScreen()
-        } else if (docElm.msRequestFullscreen) {
-          docElm.msRequestFullscreen()
-        }
-        isfullScreen.value = false
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen()
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen()
-        } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen()
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen()
-        }
-        isfullScreen.value = true
-      }
+    if (docElm.requestFullscreen) {
+      docElm.requestFullscreen()
+    } else if (docElm.mozRequestFullScreen) {
+      docElm.mozRequestFullScreen()
+    } else if (docElm.webkitRequestFullScreen) {
+      docElm.webkitRequestFullScreen()
+    } else if (docElm.msRequestFullscreen) {
+      docElm.msRequestFullscreen()
     }
-    const handleCommand = (command: string) => {
-      if (command === 'info') {
-        dialogInfoVisible.value = true
-        title.value = '编辑信息'
-        // this.userId = this.$store.getters.info.uid
-      } else if (command === 'editPassword') {
-        dialogPassVisible.value = true
-      } else if (command === 'logout') {
-        Cookies.remove('token')
-        location.reload()
-      }
+    isfullScreen.value = false
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen()
+    } else if (document.webkitCancelFullScreen) {
+      document.webkitCancelFullScreen()
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen()
     }
-
-    return {
-      isfullScreen,
-      avatar,
-      dialogInfoVisible,
-      dialogPassVisible,
-      title,
-      userId,
-      collapse,
-      successCallback,
-      editPwdCallback,
-      fullScreen,
-      handleCommand,
-      layoutState,
-      roleState
-    }
+    isfullScreen.value = true
   }
-})
+}
+const handleCommand = (command: string) => {
+  if (command === 'info') {
+    dialogInfoVisible.value = true
+    title.value = '编辑信息'
+    // this.userId = this.$store.getters.info.uid
+  } else if (command === 'editPassword') {
+    dialogPassVisible.value = true
+  } else if (command === 'logout') {
+    Cookies.remove('token')
+    location.reload()
+  }
+}
+
 </script>
 
 <style lang="scss">
